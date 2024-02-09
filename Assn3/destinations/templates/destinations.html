@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destinations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            color: #e67e22;
+        }
+
+        .add-destination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .home-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Destinations</h2>
+    <ul>
+        {% for destination in destinations %}
+            <li>
+                <a href="/destinations/{{ destination.id }}">{{ destination.name }}</a>
+                <p>Review: {{ destination.review }}</p>
+                <p>Rating: {{ destination.rating }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="add-destination">
+        <a href="/destinations/new">Add New Destination</a>
+    </div>
+    <div class="home-link">
+        <a href="/">Home</a>
+    </div>
+</body>
+</html>

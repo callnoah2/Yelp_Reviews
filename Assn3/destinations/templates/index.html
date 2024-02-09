@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bathroom Rates</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .link {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .link a {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .destination-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .destination-header {
+            background-color: #27ae60;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .destination-title {
+            font-size: 20px;
+        }
+
+        .destination-description {
+            margin-top: 10px;
+        }
+
+        .destination-rating {
+            margin-top: 10px;
+        }
+
+        .destination-review {
+            margin-top: 10px;
+        }
+
+        .ratings {
+            margin: 20px;
+        }
+
+        .ratings ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ratings li {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Bathroom Ratings</h1>
+    </div>
+    {% if user.is_authenticated %}
+        <div class="link">
+            <a href="/sessions/destroy">Logout</a>
+        </div>
+    {% else %}
+        <div class="link">
+            <a href="/users/new">Register</a>
+            <a href="/sessions/new">Login</a>
+        </div>
+    {% endif %}
+    <div class="link">
+        <a href="/destinations">Destinations</a>
+    </div>
+
+    <div class="ratings">
+        {% if destinations %}
+            <ul>
+                {% for destination in destinations %}
+                <div class="destination-box" onclick="window.location='/destinations/{{ destination.id }}'">
+                    <div class="destination-header">
+                        <h2 class="destination-title">{{ destination.name }}</h2>
+                    </div>
+                    <div class="destination-description">
+                        <p>{{ destination.description }}</p>
+                    </div>
+                    <div class="destination-rating">
+                        <p>Rating: {{ destination.rating }}</p>
+                    </div>
+                    <div class="destination-review">
+                        <p>Review: {{ destination.review }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nothing to see here</p>
+        {% endif %}
+    </div>
+</body>
+</html>
